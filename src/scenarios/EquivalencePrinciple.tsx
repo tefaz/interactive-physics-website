@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react'
 import { Scenario } from '../components/Scenario'
+import { ObserverFigure } from '../components/ObserverFigure'
 import { Metric, Segmented, Slider, Timeline } from '../components/Controls'
 import { useInView } from '../hooks/useInView'
 import { useSimulation } from '../hooks/useSimulation'
@@ -9,17 +10,6 @@ type View = 'Sealed cabin' | 'Outside view'
 
 const FALL_HEIGHT = 2
 
-function Observer({ y }: { y: number }) {
-  return <g transform={`translate(500 ${y})`}>
-    <circle cy="-69" r="18" fill="#efbf98"/>
-    <path d="M-17-74q17-24 34 1v-8q-4-19-19-19-16 1-20 22z" fill="#32283d"/>
-    <circle cx="-6" cy="-70" r="2" fill="#2e2a39"/><circle cx="6" cy="-70" r="2" fill="#2e2a39"/>
-    <path d="M-6-62q6 5 12 0" fill="none" stroke="#80564d" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M-21-43q21-13 42 0l8 72h-58z" fill="#f2a85d"/>
-    <path d="M-18-31l-47 26M18-31l38 6M-14 28l-7 54M14 28l7 54" fill="none" stroke="#f2a85d" strokeWidth="13" strokeLinecap="round"/>
-    <path d="M-29 82h17M12 82h17" stroke="#29344c" strokeWidth="9" strokeLinecap="round"/>
-  </g>
-}
 
 function Cabin({ offset = 0, ballY, rocket }: { offset?: number; ballY: number; rocket: boolean }) {
   return <g transform={`translate(0 ${offset})`}>
@@ -27,23 +17,24 @@ function Cabin({ offset = 0, ballY, rocket }: { offset?: number; ballY: number; 
     <path d="M328 109Q430 72 532 109L552 474Q430 506 308 474Z" fill="url(#cabin-wall)" stroke="#d9e7f0" strokeWidth="5"/>
     <path d="M319 439Q430 465 541 439L543 475Q430 503 316 475Z" fill="#405168"/>
     <path d="M341 134h178M326 408h211" stroke="#9fb2c4" strokeWidth="3" opacity=".7"/>
-    <rect x="350" y="150" width="62" height="94" rx="10" fill="#17263c" stroke="#9ed8ed" strokeWidth="4"/>
-    <g opacity=".45"><circle cx="366" cy="173" r="2" fill="#fff"/><circle cx="393" cy="194" r="1.5" fill="#fff"/><circle cx="374" cy="224" r="1.5" fill="#fff"/></g>
-    <Observer y={356}/>
-    <path d="M556 331h-54" stroke="#f2a85d" strokeWidth="12" strokeLinecap="round"/>
-    <circle cx="562" cy={ballY} r="17" fill="#ff6e8a" stroke="#ffd6de" strokeWidth="3" className="equivalence-ball"/>
-    <path d={`M562 205V${Math.max(205, ballY - 22)}`} stroke="#ffafbf" strokeDasharray="4 7" strokeWidth="2" opacity=".65"/>
+    <rect x="350" y="150" width="62" height="94" rx="10" fill="#2a3b51" stroke="#9ed8ed" strokeWidth="4"/>
+    <path d="M362 171h38M362 184h38M362 211h38" stroke="#9ed8ed" strokeWidth="3" strokeLinecap="round" opacity=".72"/>
+    <circle cx="369" cy="198" r="5" fill="#ffbe63"/><circle cx="392" cy="198" r="5" fill="#66dfbe"/>
+    <ObserverFigure x={442} y={438} character="researcher"/>
+    <circle cx="500" cy={ballY} r="17" fill="#ff6e8a" stroke="#ffd6de" strokeWidth="3" className="equivalence-ball"/>
+    <path d={`M500 205V${Math.max(205, ballY - 22)}`} stroke="#ffafbf" strokeDasharray="4 7" strokeWidth="2" opacity=".65"/>
   </g>
 }
 
 export function EquivalencePrinciple() {
   const ref = useRef<HTMLElement>(null)
   const active = useInView(ref)
-  const sim = useSimulation(active, .22)
   const [cause, setCause] = useState<Cause>('Accelerating rocket')
   const [view, setView] = useState<View>('Sealed cabin')
   const [acceleration, setAcceleration] = useState(9.81)
   const duration = Math.sqrt(2 * FALL_HEIGHT / acceleration)
+  // Run the animation in real time: at Earth's gravity a 2 m drop takes about 0.64 s.
+  const sim = useSimulation(active, 1 / duration)
   const time = sim.progress * duration
   const distance = Math.min(FALL_HEIGHT, .5 * acceleration * time * time)
   const fallPixels = distance / FALL_HEIGHT * 198
@@ -54,7 +45,7 @@ export function EquivalencePrinciple() {
   const changeCause = (next: Cause) => { setCause(next); sim.reset() }
   const changeAcceleration = (next: number) => { setAcceleration(next); sim.reset() }
 
-  return <Scenario sectionRef={ref} id="equivalence" number="02" eyebrow="General relativity" title="Acceleration feels like gravity" lede="Einstein’s elevator reveals the equivalence principle: inside a small sealed cabin, constant acceleration and a uniform gravitational field produce the same local physics." accent="#ffbe63"
+  return <Scenario sectionRef={ref} id="equivalence" number="02" eyebrow="General relativity" title="Gravity or acceleration?" lede="Einstein’s elevator reveals the equivalence principle: inside a small sealed cabin, constant acceleration and a uniform gravitational field produce the same local physics." accent="#ffbe63"
     visual={<>
       <svg className="space-scene equivalence-scene" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${view}: a released ball ${cause === 'Gravity' ? 'falls under gravity' : 'appears to fall in an accelerating rocket'}`}>
         <defs>
@@ -68,7 +59,7 @@ export function EquivalencePrinciple() {
           {cause === 'Accelerating rocket' && <g className="acceleration-arrow"><path d="M208 415V230" stroke="#ffca70" strokeWidth="7" strokeLinecap="round"/><path d="M180 265l28-42 28 42" fill="#ffca70"/><text x="208" y="450" textAnchor="middle">cabin accelerates up</text></g>}
         </>}
         <Cabin offset={cabinOffset} ballY={ballY} rocket={cause === 'Accelerating rocket' && view === 'Outside view'}/>
-        {view === 'Sealed cabin' && <g className="sealed-badge"><rect x="155" y="272" width="120" height="56" rx="28" fill="#222c40" stroke="#71819a"/><path d="M180 289h22v21h-22zM184 289v-7a7 7 0 0114 0v7" fill="none" stroke="#cbd5e2" strokeWidth="3"/><text x="219" y="306">no windows</text></g>}
+        {view === 'Sealed cabin' && <g className="sealed-badge"><rect x="145" y="272" width="160" height="56" rx="28" fill="#222c40" stroke="#71819a"/><path d="M170 289h22v21h-22zM174 289v-7a7 7 0 0114 0v7" fill="none" stroke="#cbd5e2" strokeWidth="3"/><text x="209" y="306">no windows</text></g>}
       </svg>
       <p className="visual-caption equivalence-caption"><strong>{outsideRocket ? 'From outside, the ball coasts while the rocket floor accelerates up to meet it.' : cause === 'Gravity' && view === 'Outside view' ? 'From outside, gravity accelerates the ball down toward the floor.' : 'From inside, the ball accelerates toward the floor. No local experiment reveals the cause.'}</strong></p>
       <div className="clock-row equivalence-result">

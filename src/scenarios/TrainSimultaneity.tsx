@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { Scenario } from '../components/Scenario'
+import { ObserverFigure } from '../components/ObserverFigure'
 import { Metric, Segmented, Slider, Timeline } from '../components/Controls'
 import { useInView } from '../hooks/useInView'
 import { useSimulation } from '../hooks/useSimulation'
@@ -22,18 +23,6 @@ function Lightning({ x, visible, label }: { x: number; visible: boolean; label: 
   </g>
 }
 
-function Person({ x, y, coat, label, glow = false, scale = 1, labelY = 64 }: { x: number; y: number; coat: string; label: string; glow?: boolean; scale?: number; labelY?: number }) {
-  return <g transform={`translate(${x} ${y}) scale(${scale})`}>
-    {glow && <circle cy="-29" r="31" fill="#fff2a0" opacity=".2" className="observer-glow"/>}
-    <circle cy="-44" r="14" fill="#f2c5a7"/>
-    <path d="M-12-47q12-16 25 1v-6q-2-15-15-16-13 1-14 17z" fill="#312942"/>
-    <circle cx="-4" cy="-45" r="1.5" fill="#342d43"/><circle cx="5" cy="-45" r="1.5" fill="#342d43"/>
-    <path d="M-4-39q5 4 9 0" fill="none" stroke="#7d4e4a" strokeWidth="1.4" strokeLinecap="round"/>
-    <path d="M-13-27q13-9 26 0l6 42h-38z" fill={coat}/>
-    <path d="M-15-19l-14 28M15-19l14 28M-8 15l-4 27M8 15l4 27" stroke={coat} strokeWidth="8" strokeLinecap="round"/>
-    <text y={labelY} textAnchor="middle">{label}</text>
-  </g>
-}
 
 function Train({ center, halfLength }: { center: number; halfLength: number }) {
   const left = center - halfLength
@@ -122,7 +111,7 @@ export function TrainSimultaneity() {
         <rect width="1000" height="560" fill="url(#day-sky)"/>
         <g className="platform-world" transform={`translate(${worldOffset} 0)`}>
           {Array.from({ length: 9 }, (_, i) => <g key={i} transform={`translate(${i * 220 - 260} ${70 + (i % 3) * 38})`} opacity=".78"><ellipse rx="42" ry="16" fill="#fff"/><ellipse cx="35" cy="4" rx="31" ry="13" fill="#fff"/><ellipse cx="-32" cy="6" rx="25" ry="11" fill="#fff"/></g>)}
-          <rect x="-600" y="344" width="2200" height="216" fill="url(#lawn)"/>
+          <rect x="-600" y="306" width="2200" height="254" fill="url(#lawn)"/>
           <path d="M-600 327H1600M-600 344H1600" stroke="#4d4b47" strokeWidth="4" opacity=".82"/>
           {Array.from({ length: 34 }, (_, i) => <path key={i} d={`M${i * 70 - 480} 322v28`} stroke="#886c4d" strokeWidth="6" opacity=".9"/>)}
           <g className="motion-streaks" opacity={frame === 'Train' ? .3 : .08}>
@@ -131,8 +120,19 @@ export function TrainSimultaneity() {
         </g>
 
         <Train center={trainCenter} halfLength={halfLength}/>
-        <Person x={trainCenter} y={275} scale={.72} coat="#e96864" label="Alice" glow={frame === 'Train' && observerReceived}/>
-        <Person x={platformPersonX} y={415} coat="#40adb2" label="Bob" labelY={-76} glow={frame === 'Platform' && observerReceived}/>
+        <defs>
+          <clipPath id="alice-window"><rect x={trainCenter - halfLength + 16} y="225" width={halfLength * 2 - 32} height="57" rx="5"/></clipPath>
+        </defs>
+        <g clipPath="url(#alice-window)">
+          {frame === 'Train' && observerReceived && <ellipse cx={trainCenter} cy="250" rx="24" ry="29" fill="#fff2a0" opacity=".4"/>}
+          <ObserverFigure x={trainCenter} y={340} scale={.62} character="alice"/>
+        </g>
+        <text x={trainCenter} y="308" textAnchor="middle" style={{ fill: '#fff4df', fontSize: 12, fontWeight: 700 }}>Alice</text>
+        <g>
+          {frame === 'Platform' && observerReceived && <ellipse cx={platformPersonX} cy="383" rx="28" ry="53" fill="#fff2a0" opacity=".3"/>}
+          <ObserverFigure x={platformPersonX} y={456} scale={.62} character="bob"/>
+          <text x={platformPersonX} y="336" textAnchor="middle">Bob</text>
+        </g>
 
         <Lightning x={frontStrikeX} visible={within(time, frontStrikeTime)} label="front"/>
         <Lightning x={rearStrikeX} visible={within(time, rearStrikeTime)} label="rear"/>

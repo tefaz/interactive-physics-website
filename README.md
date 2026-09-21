@@ -1,24 +1,78 @@
-# Field Notes — Interactive Physics
+# Fun Physics Demos
 
-A client-side, dark-mode physics laboratory built with React, TypeScript, SVG, and Vite.
+A client-side collection of interactive, visual physics experiments. Each full-screen demo lets you change a frame of reference or physical parameter, then see the consequence in an animated SVG scene with live readouts.
 
-## Development
+Built with React, TypeScript, SVG, and Vite. No backend is required.
+
+## Highlights
+
+- Seven interactive demos spanning special relativity, general relativity, Newtonian gravity, black holes, and electromagnetism.
+- Responsive, full-screen laboratory scenes with playback, reset controls, and accessible labels.
+- Rendering-independent physics models with automated tests for the core calculations.
+- Intentional visual exaggeration where an effect would otherwise be too small to see, with the scene explaining that choice.
+
+## Gallery
+
+<p align="center">
+  <img src="TwinParadox.png" alt="Twin Paradox interactive demo" width="49%" />
+  <img src="RacingAndromedaTimeDilation.png" alt="Racing Andromeda's light interactive demo" width="49%" />
+</p>
+<p align="center">
+  <img src="GravityAcceleration.png" alt="Two-body gravity interactive demo" width="49%" />
+  <img src="EventHorizonAstronaut.png" alt="Event horizon interactive demo" width="49%" />
+</p>
+<p align="center">
+  <img src="ElectricFieldsAndMagnetism.png" alt="Electric fields and magnetism interactive demo" width="49%" />
+</p>
+
+## Demos
+
+| Topic | What you can explore |
+| --- | --- |
+| Twin paradox | Compare the clocks of two brothers as one travels to a distant marker and returns. |
+| Gravity or acceleration? | Use Einstein's elevator to compare uniform gravity with an accelerating rocket. |
+| Simultaneity of events | Switch between platform and train frames to see why simultaneous lightning strikes need not remain simultaneous. |
+| Racing Andromeda's light | Follow a near-light-speed journey and compare what Earth and the traveller see of Andromeda's history. |
+| Gravity is a two-body dance | Change mass ratio and sideways speed to create planetary wobbles, binary-star orbits, collisions, and escape trajectories. |
+| At the event horizon | Compare a falling astronaut's experience with delayed, redshifted signals received on Earth. |
+| Electric fields & magnetism | Change reference frame beside a current-carrying wire to see the electric–magnetic description shift. |
+
+## Run locally
+
+Prerequisite: a current Node.js LTS release.
 
 ```bash
 npm install
 npm run dev
-npm test
-npm run build
 ```
 
-## Architecture
+Vite prints the local URL after starting the development server.
 
-- `src/physics/` contains rendering-independent models and physical constants.
-- `src/hooks/useSimulation.ts` provides normalized time, playback, reset, and scrubbing.
-- `src/hooks/useInView.ts` pauses off-screen simulations through `IntersectionObserver`.
-- `src/components/` contains reusable scenario, control, timeline, measurement, and maths UI.
-- `src/scenarios/` owns scenario-specific state and SVG rendering. Gravity and Binary Stars share both the two-body engine and `OrbitalDiagram`.
+## Commands
 
-SVG was chosen over WebGL: all four current concepts are clearer in controlled 2D, avoid camera interaction, and remain crisp at responsive sizes. Physical values and visual coordinates are deliberately separate. Every exaggerated visual scale is labelled in its scene.
+```bash
+npm run dev        # Start the development server
+npm run build      # Type-check and create a production build
+npm test           # Run the physics test suite once
+npm run test:watch # Re-run tests while files change
+```
 
-The two-body gravity lab uses velocity Verlet rather than Euler integration to limit secular energy drift. Relativity uses idealized instantaneous turnaround. The black-hole scene uses exact Schwarzschild expressions for an E=1 radial geodesic and outgoing null-signal arrival times, while keeping the diagram itself schematic.
+## Project structure
+
+```text
+src/
+├── components/  Shared scene shell, controls, and character illustrations
+├── hooks/       Viewport-aware animation and simulation playback hooks
+├── physics/     Rendering-independent models, constants, and tests
+├── scenarios/   Per-demo interaction state and SVG scenes
+└── utils/       Formatting helpers
+```
+
+## Physics and visual notes
+
+- The two-body gravity demo integrates both bodies with velocity Verlet to reduce energy drift compared with a basic Euler step.
+- Relativity demos use idealized setups—for example, instantaneous turnaround in the twin paradox—to focus on the underlying principle.
+- The black-hole experiment uses Schwarzschild expressions for an `E = 1` radial geodesic and outgoing signal arrival times; its artwork is schematic.
+- The electricity demo uses a thought-experiment car moving alongside the electron flow. At ordinary speeds the relativistic density change is far too small to draw, so the charge spacing is deliberately magnified.
+
+Physical values and visual coordinates are kept separate throughout the project, and each scene labels its important approximations.

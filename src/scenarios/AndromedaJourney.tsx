@@ -72,9 +72,9 @@ export function AndromedaJourney() {
       <div className="andromeda-summary">
         <p className="andromeda-insight"><strong>{arrived ? 'Arrival: the astronaut sees the planet’s current local moment, while Earth still receives a 2.5-million-year-old image.' : 'Flying toward Andromeda compresses millions of years of arriving images into the traveller’s much shorter lifetime.'}</strong></p>
         <div className="clock-row cosmic-clock-row">
-          <Metric label="Earth calendar" value={`+${compactYears(data.earthElapsedYears)}`} tone="#73d7ff"/>
-          <Metric label="Astronaut has aged" value={`+${compactYears(data.travellerElapsedYears)}`} tone="#ffd080"/>
-          <Metric label="Outer-ring planet calendar" value={`+${compactYears(data.earthElapsedYears)}`} tone="#dda3ff"/>
+          <Metric label="Earth time since launch" value={`+${compactYears(data.earthElapsedYears)}`} tone="#73d7ff"/>
+          <Metric label="Astronaut time since launch" value={`+${compactYears(data.travellerElapsedYears)}`} tone="#ffd080"/>
+          <Metric label="Outer-ring planet time since launch" value={`+${compactYears(data.earthElapsedYears)}`} tone="#dda3ff"/>
         </div>
         <div className="signal-age-row">
           <span><b>Earth’s received image:</b> {imageAge(DISTANCE_LY)}</span>
@@ -86,7 +86,7 @@ export function AndromedaJourney() {
       <Slider label="Cruising speed" value={nines} min={1} max={12} step={1} display={ninesLabel} onChange={setSpeed}/>
       <div className="preset-row"><button onClick={() => setSpeed(3)}>0.999c</button><button onClick={() => setSpeed(6)}>6 nines</button><button onClick={() => setSpeed(9)}>9 nines</button><button onClick={() => setSpeed(12)}>12 nines</button></div>
       <Timeline {...sim} label="Journey to Andromeda"/>
-      <div className="readout-grid"><Metric label="Time elapsed on Earth" value={compactYears(data.earthElapsedYears)}/><Metric label="Astronaut has aged" value={compactYears(data.travellerElapsedYears)}/><Metric label="Lorentz factor γ" value={data.gamma.toLocaleString(undefined,{maximumFractionDigits:0})}/><Metric label="Approach fast-forward" value={`${data.approachDopplerFactor.toLocaleString(undefined,{maximumFractionDigits:0})}×`}/></div>
+      <div className="readout-grid"><Metric label="Earth time since launch" value={compactYears(data.earthElapsedYears)}/><Metric label="Astronaut time since launch" value={compactYears(data.travellerElapsedYears)}/><Metric label="Lorentz factor γ" value={data.gamma.toLocaleString(undefined,{maximumFractionDigits:0})}/><Metric label="Approach fast-forward" value={`${data.approachDopplerFactor.toLocaleString(undefined,{maximumFractionDigits:0})}×`}/></div>
       <div className="andromeda-note"><strong>Two effects, one extraordinary trip</strong><p><b>Time dilation:</b> Earth’s frame records {compactYears(data.earthTotalYears)}, while the astronaut experiences {compactYears(data.travellerTotalYears)}.</p><p><b>Light-travel delay:</b> Earth’s image always trails the planet by 2.5 million years. Its light was emitted {imageDate(data.earthImageEmissionYear)}; that timestamp is not the image’s age.</p></div>
     </>}/>
 }

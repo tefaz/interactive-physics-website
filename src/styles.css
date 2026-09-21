@@ -114,6 +114,7 @@ input[type=range]::-webkit-slider-thumb{margin-top:-4px;width:15px;height:15px;b
 .black-hole-summary{position:absolute;z-index:7;left:32px;bottom:28px;width:min(650px,calc(100% - 430px));font-family:Nunito,sans-serif}
 .black-hole-summary>p{margin:0 0 8px;padding:9px 13px;border-radius:16px;background:rgba(30,29,53,.72);color:#e9e6f1;font-size:12px;line-height:1.4}.black-hole-summary>p strong{color:#fff}
 .black-hole-summary .clock-row{position:static;left:auto;bottom:auto;width:100%;margin:0}
+.blackhole-scene .black-hole-clock{font:700 11px Nunito,sans-serif;letter-spacing:0}.blackhole-scene .earth-clock{fill:#91dcff}.blackhole-scene .astronaut-clock{fill:#ffd6a1}
 @media (max-width:900px){.black-hole-summary{left:10px;bottom:calc(min(38svh,340px) + 18px);width:calc(100% - 20px)}.black-hole-summary .clock-row{padding:10px 12px}}
 @media (max-width:560px){.black-hole-summary{bottom:calc(min(39svh,330px) + 16px)}.black-hole-summary>p{font-size:11px;padding:8px 10px}}
 
@@ -173,9 +174,13 @@ input[type=range]::-webkit-slider-thumb{margin-top:-4px;width:15px;height:15px;b
 #simultaneity .control-panel .play{background:#7cddff!important;color:#123a55!important}
 #simultaneity .visual-caption,#simultaneity .clock-row{background:linear-gradient(145deg,rgba(11,63,73,.76),rgba(17,91,79,.6));border-color:rgba(226,255,245,.48)}
 
+.twin-scene .twin-person-label{font:700 14px Nunito,sans-serif;fill:#edf6ff;text-transform:none;letter-spacing:0}
+.twin-scene .twin-clock{font:700 12px Nunito,sans-serif;letter-spacing:0}.twin-scene .earth-clock{fill:#8eeaff}.twin-scene .rocket-clock{fill:#ffd08d}.twin-scene .twin-reunion rect{fill:rgba(13,28,49,.86);stroke:#8ceaff;stroke-width:1.5}.twin-scene .twin-reunion text:first-of-type{font-size:15px;fill:#e9faff}.twin-scene .twin-reunion text:last-of-type{font-size:12px;fill:#9eeaff}
+#twin-paradox .twin-frame-note{margin:0;padding:10px 12px;border-radius:13px;background:rgba(8,25,43,.34);color:rgba(241,250,255,.82);font-size:11px;line-height:1.42}#twin-paradox .twin-frame-note strong{color:#bcefff}
+
 /* Einstein's elevator: equivalence of uniform acceleration and local gravity. */
 .equivalence-scene{filter:none}.equivalence-ball{filter:drop-shadow(0 0 11px rgba(255,110,138,.7))}.rocket-flame{filter:drop-shadow(0 10px 16px #ff7b32)}
-.equivalence-scene .sealed-badge text,.equivalence-scene .acceleration-arrow text{fill:#dce7f4;font-size:13px}.equivalence-caption{bottom:122px}.equivalence-result{width:min(650px,calc(100% - 430px))}
+.equivalence-scene .sealed-badge text,.equivalence-scene .acceleration-arrow text{fill:#dce7f4;font-size:13px}.equivalence-scene .sealed-badge text{font-size:11px}.equivalence-caption{bottom:122px}.equivalence-result{width:min(650px,calc(100% - 430px))}
 .equivalence-note{padding:12px 13px;border-left:3px solid var(--accent);border-radius:0 14px 14px 0;background:rgba(255,255,255,.09);font-size:12px;line-height:1.42;color:rgba(255,255,255,.8)}.equivalence-note strong{display:block;color:#fff}.equivalence-note p{margin:4px 0 0}
 #equivalence .control-panel{background:linear-gradient(145deg,rgba(70,48,31,.78),rgba(47,42,57,.68));border-color:rgba(255,230,190,.42)}
 @media (max-width:900px){.equivalence-caption{bottom:calc(min(38svh,340px) + 110px)}.equivalence-result{width:calc(100% - 20px)}}
@@ -189,14 +194,55 @@ input[type=range]::-webkit-slider-thumb{margin-top:-4px;width:15px;height:15px;b
 @media (max-width:900px){.andromeda-summary{left:50%;bottom:calc(min(38svh,340px) + 18px);width:calc(100% - 20px)}.andromeda-insight{font-size:14px;padding:11px 14px}.andromeda-summary .clock-row{padding:15px 16px}.andromeda-summary .metric strong{font-size:15px}}
 @media (max-width:560px){.andromeda-note{font-size:11px;padding:9px 11px}.andromeda-summary{bottom:calc(min(39svh,330px) + 16px)}.andromeda-summary .metric strong{font-size:10px}.signal-age-row{font-size:9px;padding:6px 8px;gap:7px}}
 
+/* Scene-tinted glass for the remaining experiment controls and readouts. */
+#twin-paradox .control-panel{background:linear-gradient(145deg,rgba(10,54,79,.8),rgba(22,31,77,.7));border-color:rgba(180,232,255,.43)}
+#twin-paradox .control-panel .readout-grid,#twin-paradox .control-panel .maths>div,#twin-paradox .twin-frame-note{background:rgba(3,30,58,.3)}
+#twin-paradox .control-panel .transport button,#twin-paradox .control-panel .segmented button{background:rgba(4,35,66,.38);color:#f4fbff}
+#twin-paradox .control-panel .segmented{background:rgba(4,35,66,.32)}
+#twin-paradox .control-panel .segmented button.active{background:#dff7ff;color:#123d5b}
+
+#gravity .control-panel{background:linear-gradient(145deg,rgba(8,67,57,.8),rgba(12,43,69,.7));border-color:rgba(183,255,224,.4)}
+#gravity .control-panel .readout-grid,#gravity .control-panel .gravity-note,#gravity .control-panel .maths>div{background:rgba(2,43,48,.3)}
+#gravity .control-panel .transport button,#gravity .control-panel .preset-row button{background:rgba(3,49,55,.38);color:#f1fff9}
+#gravity .orbit-balance,#gravity .escape-note{background:linear-gradient(145deg,rgba(7,67,59,.78),rgba(12,46,70,.64));border-color:rgba(191,255,230,.38)}
+
+#black-hole .control-panel{background:linear-gradient(145deg,rgba(78,26,52,.8),rgba(42,22,63,.72));border-color:rgba(255,194,215,.42)}
+#black-hole .control-panel .readout-grid,#black-hole .control-panel .maths>div{background:rgba(59,15,43,.3)}
+#black-hole .control-panel .transport button,#black-hole .control-panel .segmented button{background:rgba(59,15,43,.38);color:#fff6fa}
+#black-hole .control-panel .segmented{background:rgba(59,15,43,.32)}
+#black-hole .control-panel .segmented button.active{background:#ffe7ef;color:#642039}
+#black-hole .black-hole-summary>p,#black-hole .black-hole-summary .clock-row{background:linear-gradient(145deg,rgba(83,27,54,.78),rgba(42,22,63,.68));border-color:rgba(255,198,220,.38)}
+
+#equivalence .visual-caption,#equivalence .equivalence-result{background:linear-gradient(145deg,rgba(83,54,32,.78),rgba(53,40,57,.66));border-color:rgba(255,226,188,.38)}
+#andromeda-journey .andromeda-summary .clock-row{background:linear-gradient(145deg,rgba(63,35,95,.8),rgba(28,31,75,.7));border-color:rgba(225,194,255,.38)}
+
 /* Electricity is one electromagnetic field seen from different frames. */
-#relativistic-electricity{--scene-base:#071226}#relativistic-electricity .visual-card{background:radial-gradient(ellipse at 35% 45%,#183653,#071226 75%)}
-.electricity-stage{position:absolute;left:28px;right:390px;top:145px;bottom:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:0}
-.electricity-view-label{color:#daeaff;font-size:16px;font-weight:800;margin-bottom:5px}
-.electricity-diagram{display:block;width:100%;min-height:0;flex:1;max-width:850px;overflow:visible}
-.electricity-diagram text{font:600 16px Nunito,system-ui,sans-serif;fill:#dce9f8}.electricity-diagram .diagram-heading{font-size:22px;font-weight:800;fill:#fff}.electricity-diagram .positive-label{fill:#ffacba}.electricity-diagram .negative-label{fill:#8de5ff}.electricity-diagram .diagram-small{fill:#a9bfd5;font-size:12px}.electricity-diagram .force-label{fill:#ffe39d;font-size:18px;font-weight:800}
-.electricity-takeaway{margin:8px 0 0;padding:12px 18px;border-radius:16px;background:#ffffff0d;border:1px solid #ffffff26;font-size:clamp(12px,1.3vw,18px);text-align:center;color:#e6f4ff}
-.electricity-frame-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.electricity-frame-buttons button{display:flex;flex-direction:column;align-items:center;gap:7px;padding:13px 7px;background:#ffffff0d;border:1px solid #ffffff33;border-radius:17px;color:#e5f5ff;cursor:pointer;font-size:12px;font-weight:800}.electricity-frame-buttons button span{font-size:28px}.electricity-frame-buttons button.selected{background:#d9f5ff;color:#173653;border-color:#fff}.electricity-frame-buttons button:focus-visible,.electricity-details summary:focus-visible{outline:3px solid #ffd36b;outline-offset:3px}
-.electricity-prompt{margin:0;text-align:center;font-size:13px;color:#d7eaff}.electricity-scale-note{font-size:11px;color:#b6cbdf;margin:0}.electricity-details{border-top:1px solid #ffffff26;padding-top:10px;font-size:12px;line-height:1.5;color:#d6e6f6}.electricity-details summary{cursor:pointer;color:#f5fbff}.electricity-details a{color:#95e5ff}.electricity-details p{margin:10px 0}
-@media(max-width:900px){#relativistic-electricity .scenario-heading{top:22px}#relativistic-electricity .scenario-heading h2{font-size:30px}#relativistic-electricity .control-panel{height:auto;max-height:34svh;bottom:10px}.electricity-stage{left:12px;right:12px;top:90px;bottom:calc(34svh + 24px)}.electricity-view-label{font-size:13px}.electricity-takeaway{padding:8px 10px;margin-top:3px}.electricity-frame-buttons button{flex-direction:row;justify-content:center;padding:8px}.electricity-frame-buttons button span{font-size:21px}#relativistic-electricity .control-panel{gap:9px}}
-@media(max-height:650px) and (min-width:901px){.electricity-stage{top:100px;bottom:12px}.electricity-takeaway{padding:6px 10px}.electricity-view-label{font-size:12px}#relativistic-electricity .scenario-heading h2{font-size:34px}}
+#relativistic-electricity{--scene-base:#07182d}
+#relativistic-electricity .visual-card{background:#07182d}
+#relativistic-electricity .scenario-heading h2{color:#f4fbff;text-shadow:0 8px 32px rgba(0,8,20,.45)}
+#relativistic-electricity .scenario-heading .eyebrow{color:#7df1de!important;text-shadow:none}
+#relativistic-electricity .control-panel{background:linear-gradient(145deg,rgba(16,49,68,.88),rgba(11,30,54,.78));border-color:rgba(132,234,218,.3);color:#effffc}
+#relativistic-electricity .control-panel .control-label{color:#a7ccc9}
+#relativistic-electricity .control-panel .control output{color:#f2fffd}
+#relativistic-electricity .control-panel .transport button{background:rgba(100,229,210,.1);color:#f4fffd}
+.electricity-stage{position:absolute;inset:0;min-height:0;overflow:hidden;background:#07182d}
+.electricity-diagram{display:block;width:100%;height:100%;min-height:0}
+.electricity-diagram text{font-family:Nunito,system-ui,sans-serif}
+.field-lines ellipse{fill:none;stroke:#67ead4;stroke-width:1.4;stroke-dasharray:5 11;opacity:.2;transform-origin:500px 305px;animation:field-drift 18s linear infinite}.field-lines ellipse:nth-child(2){animation-direction:reverse;opacity:.15}.field-lines ellipse:nth-child(3){animation-duration:25s;opacity:.1}
+@keyframes field-drift{to{stroke-dashoffset:-160}}
+.magnetic-label>circle:first-child{fill:rgba(103,234,212,.08);stroke:#67ead4;stroke-width:1.5}.magnetic-label>circle:nth-child(2){fill:#67ead4;filter:drop-shadow(0 0 5px #67ead4)}.magnetic-label text{fill:#9ed9d3;font-size:12px;font-weight:700;letter-spacing:.04em}
+.electricity-ground{fill:#081521;opacity:.82}.wire-shadow rect:first-child{fill:#020811;opacity:.46;filter:blur(9px)}.wire-shadow rect:last-child{fill:none;stroke:#67ead4;stroke-width:10;opacity:.07;filter:blur(8px)}
+.charge circle{stroke-width:1.5}.charge path{fill:none;stroke:#071827;stroke-width:2;stroke-linecap:round}.charge-positive circle{fill:#ff8b9e;stroke:#ffc7d0}.charge-negative circle{fill:#61dff5;stroke:#c1f6ff}.charge{transition:opacity .3s}
+.wire-key text{fill:#aac2d0;font-size:11px;font-weight:700}.wire-key .key-positive{fill:#ff8b9e}.wire-key .key-negative{fill:#61dff5}
+.electron-flow path{fill:none;stroke:#75e8f5;stroke-width:2;stroke-linecap:round}.electron-flow text{fill:#9bdbe5;font-size:11px;font-weight:700;letter-spacing:.03em}.is-riding .electron-flow{opacity:.22}
+.electricity-observer,.electricity-car{opacity:.18;filter:saturate(.4);transition:opacity .35s,filter .35s}.electricity-observer.is-active,.electricity-car.is-active{opacity:1;filter:drop-shadow(0 8px 11px rgba(0,7,15,.48))}.observer-shadow{fill:#020811;opacity:.38}.observer-tag rect{fill:#0b2032;stroke:#52798c;stroke-width:1}.observer-tag text{fill:#d5e8ef;font-size:9px;font-weight:800;letter-spacing:.1em}.car-roof,.car-body{fill:url(#car-paint);stroke:#ffdda0;stroke-width:2}.car-window{fill:#153c56;stroke:#98d8e4;stroke-width:1.5}.car-highlight{fill:none;stroke:#fff0c7;stroke-width:2;opacity:.55}.car-wheel{fill:#07101b;stroke:#6c8090;stroke-width:3}.car-hub{fill:#bbcad0}
+.frame-readout text{fill:#b4cfda}.frame-readout .readout-kicker{font-size:9px;font-weight:800;letter-spacing:.15em;opacity:.65}.frame-readout .readout-title{fill:#fff;font-size:16px;font-weight:800}
+.electricity-insight{position:absolute;z-index:4;left:32px;bottom:25px;width:min(560px,calc(100% - 430px));display:flex;align-items:flex-start;gap:12px;margin:0;padding:14px 17px;border:1px solid rgba(139,235,221,.24);border-radius:18px;background:linear-gradient(135deg,rgba(14,47,65,.87),rgba(10,27,49,.82));box-shadow:0 12px 35px rgba(0,7,18,.28);color:#c8dfdf;backdrop-filter:blur(14px)}.electricity-insight-dot{width:9px;height:9px;flex:0 0 auto;margin-top:5px;border-radius:50%;background:#67ead4;box-shadow:0 0 12px #67ead4}.is-riding .electricity-insight-dot{background:#ff8b9e;box-shadow:0 0 12px #ff8b9e}.electricity-insight div{display:flex;flex-direction:column;gap:3px}.electricity-insight span{color:#7df1de;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.is-riding .electricity-insight div>span{color:#ffacba}.electricity-insight strong{font-size:13px;line-height:1.4;color:#f3ffff}
+.electricity-control-intro{display:flex;flex-direction:column;gap:3px}.electricity-control-intro span{color:#83c9c2;font-size:9px;font-weight:800;letter-spacing:.14em}.electricity-control-intro strong{font-size:15px;color:#fff}
+.electricity-frame-buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px}.electricity-frame-buttons button{display:flex;align-items:center;gap:9px;padding:11px;background:rgba(109,225,209,.07);border:1px solid rgba(150,235,223,.14);border-radius:15px;color:#bcd6d5;cursor:pointer;text-align:left;transition:transform .18s,background .18s,border-color .18s}.electricity-frame-buttons button>svg{width:21px;flex:0 0 auto}.electricity-frame-buttons button>span{display:flex;flex-direction:column;gap:1px}.electricity-frame-buttons button strong{font-size:11px;white-space:nowrap}.electricity-frame-buttons button small{font-size:9px;color:#83a3a5;white-space:nowrap}.electricity-frame-buttons button.selected{background:linear-gradient(145deg,#eafffa,#c9f7ef);border-color:#fff;color:#133c48;box-shadow:0 6px 20px rgba(1,13,25,.22)}.electricity-frame-buttons button.selected small{color:#52757a}.electricity-frame-buttons button:hover{transform:translateY(-1px);border-color:rgba(150,235,223,.45)}.electricity-frame-buttons button:focus-visible{outline:3px solid #ffe090;outline-offset:3px}
+.electricity-status{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:15px;background:rgba(103,234,212,.08);border:1px solid rgba(103,234,212,.14)}.electricity-status>span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#67ead4;color:#0d3541;font-size:19px;font-weight:900}.electricity-status>div{display:flex;flex-direction:column}.electricity-status small{color:#85aaa9;font-size:8px;font-weight:800;letter-spacing:.12em}.electricity-status strong{color:#eafffb;font-size:13px}.electricity-status.is-charged{background:rgba(255,139,158,.08);border-color:rgba(255,139,158,.18)}.electricity-status.is-charged>span{background:#ff8b9e;color:#50182b}
+.electricity-speed{display:grid;grid-template-columns:1fr auto;align-items:end;gap:2px 12px;padding:2px 1px}.electricity-speed span{color:#a7ccc9;font-size:9px;font-weight:800;letter-spacing:.12em}.electricity-speed strong{grid-row:1/3;grid-column:2;color:#fff;font-size:16px}.electricity-speed small{color:#8fb1b1;font-size:10px}
+.electricity-scale-note{font-size:10px;line-height:1.45;color:#91b4b3;margin:0;padding-top:2px}
+@media(max-width:900px){#relativistic-electricity .scenario-heading{top:22px}#relativistic-electricity .scenario-heading h2{font-size:30px}#relativistic-electricity .control-panel{height:auto;max-height:35svh;bottom:10px;gap:9px}.electricity-insight{left:12px;bottom:calc(35svh + 24px);width:calc(100% - 24px);padding:10px 12px}.electricity-insight strong{font-size:11px}.electricity-control-intro,.electricity-status{display:none}.electricity-frame-buttons button{justify-content:center;padding:8px}.electricity-frame-buttons button small{display:none}.frame-readout{display:none}}
+@media(max-width:560px){.wire-key,.magnetic-label{display:none}.electricity-frame-buttons button>svg{width:18px}.electricity-frame-buttons button strong{font-size:10px}.electricity-scale-note{display:none}}
+@media(max-height:650px) and (min-width:901px){#relativistic-electricity .scenario-heading h2{font-size:34px}.electricity-insight{padding:9px 13px}.electricity-status{display:none}}
