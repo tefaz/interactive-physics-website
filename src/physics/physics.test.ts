@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { gamma, twinJourney } from './relativity'
+import { gamma, intergalacticJourney, simultaneityExperiment, twinJourney } from './relativity'
 import { fromFrequency, fromWavelength } from './electromagnetism'
 import { C, G, H, SOLAR_MASS } from './constants'
 import { circularSystem, orbitalPeriod, stepVerlet } from './orbits'
@@ -12,6 +12,25 @@ describe('special relativity', () => {
     const trip = twinJourney(0.8, 4)
     expect(trip.earthTotalYears).toBeCloseTo(10)
     expect(trip.travellerTotalYears).toBeCloseTo(6)
+  })
+  it('transforms simultaneous platform strikes into sequential train events', () => {
+    const experiment = simultaneityExperiment(0.6, C)
+    expect(experiment.platformLengthMeters).toBeCloseTo(0.8 * C)
+    expect(experiment.trainFrontStrikeSeconds).toBeCloseTo(-0.3)
+    expect(experiment.trainRearStrikeSeconds).toBeCloseTo(0.3)
+    expect(experiment.trainStrikeGapSeconds).toBeCloseTo(0.6)
+    expect(experiment.trainFrontSignalArrivalSeconds).toBeCloseTo(0.2)
+    expect(experiment.trainRearSignalArrivalSeconds).toBeCloseTo(0.8)
+  })
+  it('distinguishes telescope delay from traveller time on a one-way journey', () => {
+    const departure = intergalacticJourney(0.8, 10, 0)
+    const arrival = intergalacticJourney(0.8, 10, 1)
+    expect(departure.earthImageEmissionYear).toBe(-10)
+    expect(departure.travellerImageEmissionYear).toBe(-10)
+    expect(arrival.earthTotalYears).toBeCloseTo(12.5)
+    expect(arrival.travellerTotalYears).toBeCloseTo(7.5)
+    expect(arrival.earthImageEmissionYear).toBeCloseTo(2.5)
+    expect(arrival.travellerImageEmissionYear).toBeCloseTo(12.5)
   })
 })
 

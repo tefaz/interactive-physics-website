@@ -1,16 +1,18 @@
 import { TwinParadox } from './scenarios/TwinParadox'
-import { Electromagnetic } from './scenarios/Electromagnetic'
+import { TrainSimultaneity } from './scenarios/TrainSimultaneity'
+import { EquivalencePrinciple } from './scenarios/EquivalencePrinciple'
+import { AndromedaJourney } from './scenarios/AndromedaJourney'
 import { Gravity } from './scenarios/Gravity'
-import { BinaryStars } from './scenarios/BinaryStars'
 import { BlackHole } from './scenarios/BlackHole'
 
 export function App() {
   return <>
     <main>
       <TwinParadox/>
-      <Electromagnetic/>
+      <EquivalencePrinciple/>
+      <TrainSimultaneity/>
+      <AndromedaJourney/>
       <Gravity/>
-      <BinaryStars/>
       <BlackHole/>
     </main>
   </>

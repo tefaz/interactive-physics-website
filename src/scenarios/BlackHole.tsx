@@ -35,7 +35,7 @@ export function BlackHole() {
   const astronautOpacity=frame==='Earth' ? earthImageOpacity : 1
   const astronautColor=frame==='Earth' && earthImageOpacity<.45 ? '#ff887f' : '#d9ecff'
   const px=(r:number)=>145+(EARTH_DISTANCE-r)/(EARTH_DISTANCE-1)*363
-  return <Scenario sectionRef={ref} id="black-hole" number="05" eyebrow="Schwarzschild black hole" title="At the event horizon" lede="Compare what the traveller feels with the messages a distant observer can receive." accent="#ff718f"
+  return <Scenario sectionRef={ref} id="black-hole" number="04" eyebrow="Schwarzschild black hole" title="At the event horizon" lede="Compare what the traveller feels with the messages a distant observer can receive." accent="#ff718f"
     visual={<>
       <div className="visual-topbar"><span className="status-dot red"/><strong>{R>1.05?'Falling toward the horizon':R>1?'Approaching the horizon':'Horizon crossing'}</strong><span className="not-scale">Radial distance visually compressed</span></div>
       <svg className="space-scene blackhole-scene" viewBox="0 0 860 390" role="img" aria-label="Object falling toward a black hole while light pulses travel to a distant observer">

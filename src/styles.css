@@ -144,3 +144,47 @@ input[type=range]::-webkit-slider-thumb{margin-top:-4px;width:15px;height:15px;b
 .escape-note{position:absolute;z-index:7;left:32px;bottom:76px;max-width:410px;padding:9px 13px;border-radius:16px;color:#f8fbff;background:linear-gradient(145deg,rgba(255,255,255,.2),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.34);box-shadow:0 8px 25px rgba(2,7,22,.13),inset 0 1px 0 rgba(255,255,255,.52);backdrop-filter:blur(16px);font:12px/1.4 Nunito,sans-serif}.escape-note strong{color:#fff}
 @media (max-width:900px){.escape-note{left:18px;bottom:calc(min(38svh,340px) + 68px);max-width:calc(100% - 36px)}}
 @media (max-width:560px){.escape-note{display:none}}
+
+/* Relativity of simultaneity: daylight cutaway-train scene. */
+.relativity-scene{filter:none}
+.relativity-train{filter:drop-shadow(0 10px 13px rgba(16,74,112,.25))}
+.lightning{opacity:0;filter:drop-shadow(0 0 12px #31bfff)}.lightning.is-visible{opacity:1}
+.lightning text{fill:#126ba3;font-size:13px}.light-pulse{filter:drop-shadow(0 0 9px #37c8ff)}
+.relativity-scene text{fill:#15344e}
+.relativity-scene .lightning text{fill:#126ba3}
+.observer-glow{filter:blur(2px)}
+.relativity-scene+.visual-caption{bottom:122px}
+.simultaneity-result{width:min(650px,calc(100% - 430px))}
+.simultaneity-note{padding:12px 13px;border-radius:16px;background:rgba(255,255,255,.1);font-size:12px;line-height:1.42;color:rgba(255,255,255,.76)}
+.simultaneity-note strong{display:block;margin-bottom:3px;color:#fff}.simultaneity-note p{margin:0}
+.relativity-principle{padding:12px 13px;border-left:3px solid #ffd166;border-radius:0 14px 14px 0;background:rgba(255,255,255,.08);font-size:12px;line-height:1.42;color:rgba(255,255,255,.8)}.relativity-principle strong{display:block;color:#fff}.relativity-principle p{margin:5px 0 0}.relativity-principle b{color:#fff2a0}
+@media (max-width:900px){.relativity-scene+.visual-caption{bottom:calc(min(38svh,340px) + 110px)}.simultaneity-result{width:calc(100% - 20px)}}
+@media (max-width:560px){.simultaneity-note,.relativity-principle{font-size:11px;padding:9px 11px}.simultaneity-result .metric strong{font-size:11px}.simultaneity-result .clock-vs{display:none}}
+.gravity-note{padding:10px 12px;border-left:3px solid var(--accent);border-radius:0 14px 14px 0;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-size:12px;line-height:1.4}.gravity-note strong{display:block;color:#fff}.gravity-note p{margin:4px 0 0}
+
+/* The daylight train scene needs deliberately darker glass for legible controls. */
+#simultaneity .control-panel{background:linear-gradient(145deg,rgba(10,58,89,.78),rgba(14,88,111,.62));border-color:rgba(225,249,255,.55);box-shadow:0 18px 55px rgba(8,46,71,.28),inset 0 1px 0 rgba(255,255,255,.42)}
+#simultaneity .control-panel .control-label,#simultaneity .control-panel .metric span{color:rgba(237,251,255,.82)}
+#simultaneity .control-panel .control output,#simultaneity .control-panel .metric strong{color:#fff}
+#simultaneity .control-panel .readout-grid,#simultaneity .control-panel .simultaneity-note,#simultaneity .control-panel .relativity-principle{background:rgba(2,35,54,.28)}
+#simultaneity .control-panel .transport button,#simultaneity .control-panel .segmented button,#simultaneity .control-panel .preset-row button{background:rgba(3,44,69,.38);color:#fff}
+#simultaneity .control-panel .segmented{background:rgba(3,44,69,.32)}
+#simultaneity .control-panel .segmented button.active{background:#e7f9ff;color:#123c59}
+#simultaneity .control-panel .play{background:#7cddff!important;color:#123a55!important}
+#simultaneity .visual-caption,#simultaneity .clock-row{background:linear-gradient(145deg,rgba(11,63,73,.76),rgba(17,91,79,.6));border-color:rgba(226,255,245,.48)}
+
+/* Einstein's elevator: equivalence of uniform acceleration and local gravity. */
+.equivalence-scene{filter:none}.equivalence-ball{filter:drop-shadow(0 0 11px rgba(255,110,138,.7))}.rocket-flame{filter:drop-shadow(0 10px 16px #ff7b32)}
+.equivalence-scene .sealed-badge text,.equivalence-scene .acceleration-arrow text{fill:#dce7f4;font-size:13px}.equivalence-caption{bottom:122px}.equivalence-result{width:min(650px,calc(100% - 430px))}
+.equivalence-note{padding:12px 13px;border-left:3px solid var(--accent);border-radius:0 14px 14px 0;background:rgba(255,255,255,.09);font-size:12px;line-height:1.42;color:rgba(255,255,255,.8)}.equivalence-note strong{display:block;color:#fff}.equivalence-note p{margin:4px 0 0}
+#equivalence .control-panel{background:linear-gradient(145deg,rgba(70,48,31,.78),rgba(47,42,57,.68));border-color:rgba(255,230,190,.42)}
+@media (max-width:900px){.equivalence-caption{bottom:calc(min(38svh,340px) + 110px)}.equivalence-result{width:calc(100% - 20px)}}
+@media (max-width:560px){.equivalence-note{font-size:11px;padding:9px 11px}.equivalence-result .metric strong{font-size:11px}.equivalence-result .clock-vs{display:none}}
+
+/* One-way relativistic journey toward Andromeda and its incoming light. */
+.andromeda-scene text{fill:#c9cce0}.andromeda-scene .image-date{fill:#f1d8ff;font-size:13px}.andromeda-ship{filter:drop-shadow(0 0 12px rgba(112,220,255,.6))}
+.andromeda-summary{position:absolute;z-index:7;left:calc(50% - 182px);transform:translateX(-50%);bottom:28px;width:min(820px,calc(100% - 430px))}.andromeda-insight{margin:0 0 10px;padding:13px 18px;border:1px solid rgba(220,188,255,.34);border-radius:17px;background:linear-gradient(135deg,rgba(83,46,123,.82),rgba(30,29,70,.84));box-shadow:0 8px 25px rgba(2,7,22,.22);color:#f5eaff;font:600 15px/1.35 Nunito,sans-serif;text-align:center;backdrop-filter:blur(16px)}.andromeda-summary .clock-row{position:static;left:auto;bottom:auto;width:100%;padding:20px 24px}.andromeda-summary .metric span{font-size:12px}.andromeda-summary .metric strong{font-size:19px;white-space:normal;line-height:1.15}.cosmic-clock-row{grid-template-columns:1fr 1fr 1fr;gap:24px}.cosmic-clock-row .metric:nth-child(2){text-align:center}.signal-age-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:9px;padding:12px 16px;border:1px solid rgba(255,255,255,.25);border-radius:15px;background:rgba(21,17,48,.78);backdrop-filter:blur(16px);font:12px/1.35 Nunito,sans-serif;color:#ded9ea;box-shadow:0 8px 25px rgba(2,7,22,.18)}.signal-age-row span:last-child{text-align:right}.signal-age-row b{color:#fff}
+.andromeda-note{padding:12px 13px;border-left:3px solid var(--accent);border-radius:0 14px 14px 0;background:rgba(255,255,255,.08);font-size:12px;line-height:1.4;color:rgba(255,255,255,.8)}.andromeda-note strong{display:block;color:#fff}.andromeda-note p{margin:5px 0 0}.andromeda-note b{color:#edd3ff}
+#andromeda-journey .control-panel{background:linear-gradient(145deg,rgba(45,25,71,.8),rgba(25,28,64,.7));border-color:rgba(225,194,255,.4)}
+@media (max-width:900px){.andromeda-summary{left:50%;bottom:calc(min(38svh,340px) + 18px);width:calc(100% - 20px)}.andromeda-insight{font-size:14px;padding:11px 14px}.andromeda-summary .clock-row{padding:15px 16px}.andromeda-summary .metric strong{font-size:15px}}
+@media (max-width:560px){.andromeda-note{font-size:11px;padding:9px 11px}.andromeda-summary{bottom:calc(min(39svh,330px) + 16px)}.andromeda-summary .metric strong{font-size:10px}.signal-age-row{font-size:9px;padding:6px 8px;gap:7px}}

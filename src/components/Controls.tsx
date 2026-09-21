@@ -20,6 +20,13 @@ export function Timeline({ progress, setProgress, playing, toggle, reset, label 
   </div>
 }
 
+export function Playback({ playing, toggle, reset }: { playing: boolean; toggle: () => void; reset: () => void }) {
+  return <div className="transport playback-controls">
+    <button className="play" onClick={toggle}>{playing ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />} {playing ? 'Pause' : 'Play'}</button>
+    <button className="icon-button" onClick={reset} aria-label="Reset"><RotateCcw size={17} /> Reset</button>
+  </div>
+}
+
 export function Segmented<T extends string>({ value, options, onChange, label }: { value: T; options: readonly T[]; onChange: (v: T) => void; label: string }) {
   return <div className="segmented-wrap"><span className="control-label">{label}</span><div className="segmented">
     {options.map(option => <button key={option} className={value === option ? 'active' : ''} onClick={() => onChange(option)}>{option}</button>)}
