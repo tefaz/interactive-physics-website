@@ -1,13 +1,19 @@
 {
   "name": "physics-playground",
+  "description": "Interactive visual physics experiments for relativity, gravity, black holes, and electromagnetism.",
+  "author": "Mads Nørgaard <madds.noergaard@gmail.com>",
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "main": "electron/main.cjs",
+  "desktopName": "fun-physics-demos",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "desktop:dev": "npm run build && electron .",
+    "appimage": "npm run build && electron-builder --linux AppImage"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -22,6 +28,29 @@
     "jsdom": "latest",
     "vitest": "latest",
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "electron": "latest",
+    "electron-builder": "latest"
+  },
+  "build": {
+    "appId": "com.tefaz.funphysicsdemos",
+    "productName": "Fun Physics Demos",
+    "directories": {
+      "output": "release"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Education",
+      "syncDesktopName": true,
+      "synopsis": "Interactive visual physics experiments"
+    },
+    "icon": "build/icon.png",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ]
   }
 }

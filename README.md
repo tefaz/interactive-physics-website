@@ -55,7 +55,19 @@ npm run dev        # Start the development server
 npm run build      # Type-check and create a production build
 npm test           # Run the physics test suite once
 npm run test:watch # Re-run tests while files change
+npm run appimage   # Build a Linux AppImage in release/
 ```
+
+## Linux desktop app
+
+The [GitHub Releases](https://github.com/tefaz/interactive-physics-website/releases) page includes a portable Linux AppImage. After downloading it, make it executable and run it:
+
+```bash
+chmod +x Fun-Physics-Demos-*.AppImage
+./Fun-Physics-Demos-*.AppImage
+```
+
+The AppImage bundles the app and does not need a separate Node.js installation.
 
 ## Project structure
 
