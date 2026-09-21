@@ -4,6 +4,7 @@ import { EquivalencePrinciple } from './scenarios/EquivalencePrinciple'
 import { AndromedaJourney } from './scenarios/AndromedaJourney'
 import { Gravity } from './scenarios/Gravity'
 import { BlackHole } from './scenarios/BlackHole'
+import { RelativisticElectricity } from './scenarios/RelativisticElectricity'
 
 export function App() {
   return <>
@@ -14,6 +15,7 @@ export function App() {
       <AndromedaJourney/>
       <Gravity/>
       <BlackHole/>
+      <RelativisticElectricity/>
     </main>
   </>
 }

@@ -29,3 +29,31 @@ export function spectrumName(wavelength: number) {
   if (wavelength > 1e-11) return 'X-ray'
   return 'Gamma ray'
 }
+
+/**
+ * A neutral wire viewed from a frame moving parallel to it.
+ *
+ * Values are normalized to the positive line-charge density in the wire's
+ * rest frame. Positive beta points with the electrons. The lab-frame
+ * electron velocity is also positive, so conventional current is negative.
+ */
+export function wireInMovingFrame(electronBeta: number, observerBeta: number) {
+  const gamma = 1 / Math.sqrt(1 - observerBeta ** 2)
+  const positiveDensity = gamma
+  const negativeDensity = -gamma * (1 - observerBeta * electronBeta)
+  const netDensity = positiveDensity + negativeDensity
+  const labCurrent = -electronBeta
+  const current = gamma * labCurrent
+  const relativeElectronBeta = (electronBeta - observerBeta) / (1 - electronBeta * observerBeta)
+  const relativeLatticeBeta = -observerBeta
+
+  return {
+    gamma,
+    positiveDensity,
+    negativeDensity,
+    netDensity,
+    current,
+    relativeElectronBeta,
+    relativeLatticeBeta,
+  }
+}

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { gamma, intergalacticJourney, simultaneityExperiment, twinJourney } from './relativity'
-import { fromFrequency, fromWavelength } from './electromagnetism'
+import { fromFrequency, fromWavelength, wireInMovingFrame } from './electromagnetism'
 import { C, G, H, SOLAR_MASS } from './constants'
 import { circularSystem, orbitalPeriod, stepVerlet } from './orbits'
 import { fallRadius, radialFallCoordinateTime, radialFallProperTime, schwarzschildRadius } from './blackHole'
@@ -37,6 +37,18 @@ describe('special relativity', () => {
 describe('electromagnetism', () => {
   it('links wavelength and frequency', () => expect(fromWavelength(1).frequency).toBe(C))
   it('links frequency and photon energy', () => expect(fromFrequency(1).energy).toBe(H))
+  it('keeps the wire neutral in its own frame', () => {
+    const wire = wireInMovingFrame(.6, 0)
+    expect(wire.netDensity).toBeCloseTo(0)
+    expect(wire.relativeElectronBeta).toBeCloseTo(.6)
+  })
+  it('finds positive charge density in the electron frame', () => {
+    const wire = wireInMovingFrame(.6, .6)
+    expect(wire.relativeElectronBeta).toBeCloseTo(0)
+    expect(wire.netDensity).toBeCloseTo(.45)
+    expect(wire.positiveDensity).toBeCloseTo(1.25)
+    expect(wire.negativeDensity).toBeCloseTo(-.8)
+  })
 })
 
 describe('gravity', () => {
