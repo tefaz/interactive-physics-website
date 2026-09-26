@@ -5,7 +5,7 @@ type SliderProps = { label: string; value: number; min: number; max: number; ste
 export function Slider({ label, value, min, max, step = 1, display, onChange }: SliderProps) {
   return <label className="control">
     <span><span className="control-label">{label}</span><output>{display}</output></span>
-    <input type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))} />
+    <input type="range" aria-label={label} min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))} />
   </label>
 }
 

@@ -49,6 +49,14 @@ describe('electromagnetism', () => {
     expect(wire.positiveDensity).toBeCloseTo(1.25)
     expect(wire.negativeDensity).toBeCloseTo(-.8)
   })
+  it('has no force-producing current or charge when flow is off', () => {
+    const wire = wireInMovingFrame(0, 0)
+    expect(wire.current).toBeCloseTo(0)
+    expect(wire.netDensity).toBe(0)
+  })
+  it('shows a stronger positive density at higher shared probe and electron speed', () => {
+    expect(wireInMovingFrame(.8, .8).netDensity).toBeGreaterThan(wireInMovingFrame(.4, .4).netDensity)
+  })
 })
 
 describe('gravity', () => {

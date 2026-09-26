@@ -6,7 +6,7 @@ Built with React, TypeScript, SVG, and Vite. No backend is required.
 
 ## Highlights
 
-- Seven interactive demos spanning special relativity, general relativity, Newtonian gravity, black holes, and electromagnetism.
+- Nine interactive demos spanning relativity, Newtonian gravity, black holes, electromagnetism, and quantum physics.
 - Responsive, full-screen laboratory scenes with playback, reset controls, and accessible labels.
 - Rendering-independent physics models with automated tests for the core calculations.
 - Intentional visual exaggeration where an effect would otherwise be too small to see, with the scene explaining that choice.
@@ -34,8 +34,10 @@ Built with React, TypeScript, SVG, and Vite. No backend is required.
 | Simultaneity of events | Switch between platform and train frames to see why simultaneous lightning strikes need not remain simultaneous. |
 | Racing Andromeda's light | Follow a near-light-speed journey and compare what Earth and the traveller see of Andromeda's history. |
 | Gravity is a two-body dance | Change mass ratio and sideways speed to create planetary wobbles, binary-star orbits, collisions, and escape trajectories. |
+| Three bodies, no simple orbit | Set the mass of each body, starting speed, and spacing; compare a figure-eight orbit, unequal stars, and a star with two planets. |
 | At the event horizon | Compare a falling astronaut's experience with delayed, redshifted signals received on Earth. |
-| Electric fields & magnetism | Change reference frame beside a current-carrying wire to see the electric–magnetic description shift. |
+| Electric fields & magnetism | Change electron flow and follow a positive probe beside a wire. Compare its magnetic force in the wire frame with its electric force in the probe frame. |
+| One electron at a time | Accumulate detections in a double-slit experiment, close or observe a slit, and move the screen to compare nearby slit images with distant interference fringes. |
 
 ## Run locally
 
@@ -83,8 +85,10 @@ src/
 ## Physics and visual notes
 
 - The two-body gravity demo integrates both bodies with velocity Verlet to reduce energy drift compared with a basic Euler step.
+- The three-body demo integrates all pairwise pulls with velocity Verlet. Very close approaches use softened gravity and shorter time steps to keep the simulation stable.
+- The double-slit demo samples individual detections from spreading Gaussian slit amplitudes. A nearby screen resolves two slit images; a distant screen shows fringes only when both paths are available and indistinguishable.
 - Relativity demos use idealized setups—for example, instantaneous turnaround in the twin paradox—to focus on the underlying principle.
 - The black-hole experiment uses Schwarzschild expressions for an `E = 1` radial geodesic and outgoing signal arrival times; its artwork is schematic.
-- The electricity demo uses a thought-experiment car moving alongside the electron flow. At ordinary speeds the relativistic density change is far too small to draw, so the charge spacing is deliberately magnified.
+- The electricity demo uses a positive probe initially moving alongside the electron flow. The wire is neutral in its own frame and positively charged in the probe's frame. Its charge spacing and the probe's bend are deliberately enlarged to show the effect.
 
 Physical values and visual coordinates are kept separate throughout the project, and each scene labels its important approximations.
