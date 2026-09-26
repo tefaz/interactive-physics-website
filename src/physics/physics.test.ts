@@ -22,6 +22,21 @@ describe('special relativity', () => {
     expect(experiment.trainFrontSignalArrivalSeconds).toBeCloseTo(0.2)
     expect(experiment.trainRearSignalArrivalSeconds).toBeCloseTo(0.8)
   })
+  it('accounts for the platform observer’s transverse distance in both frames', () => {
+    for (const beta of [0, .3, .6, .9]) {
+      const experiment = simultaneityExperiment(beta, C, .35 * C)
+      const platformArrival = experiment.platformSignalArrivalSeconds
+      const trainArrival = experiment.trainPlatformSignalArrivalSeconds
+      const half = experiment.platformLengthMeters / (2 * C)
+      expect(platformArrival).toBeCloseTo(Math.hypot(half, .35), 12)
+      expect(trainArrival).toBeCloseTo(experiment.gamma * platformArrival, 12)
+      // In the train frame Bob moves. Each expanding light sphere intersects
+      // his position at the same event, despite different emission times.
+      const bobX = -beta * trainArrival
+      expect(Math.hypot(bobX - .5, .35)).toBeCloseTo(trainArrival - experiment.trainFrontStrikeSeconds, 12)
+      expect(Math.hypot(bobX + .5, .35)).toBeCloseTo(trainArrival - experiment.trainRearStrikeSeconds, 12)
+    }
+  })
   it('distinguishes telescope delay from traveller time on a one-way journey', () => {
     const departure = intergalacticJourney(0.8, 10, 0)
     const arrival = intergalacticJourney(0.8, 10, 1)

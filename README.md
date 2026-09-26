@@ -37,7 +37,7 @@ Built with React, TypeScript, SVG, and Vite. No backend is required.
 | Three bodies, no simple orbit | Set the mass of each body, starting speed, and spacing; compare a figure-eight orbit, unequal stars, and a star with two planets. |
 | At the event horizon | Compare a falling astronaut's experience with delayed, redshifted signals received on Earth. |
 | Electric fields & magnetism | Change electron flow and follow a positive probe beside a wire. Compare its magnetic force in the wire frame with its electric force in the probe frame. |
-| One electron at a time | Accumulate detections in a double-slit experiment, close or observe a slit, and move the screen to compare nearby slit images with distant interference fringes. |
+| Double slit experiment | Watch individual detections build five interference bands, observe the paths for two bands, or close one slit for a band on the open side. Patterns use a fixed, schematic detector view. |
 
 ## Run locally
 

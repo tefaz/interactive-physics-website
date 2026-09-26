@@ -14,6 +14,7 @@ export type SimultaneityExperiment = {
   trainRearStrikeSeconds: number
   trainStrikeGapSeconds: number
   platformSignalArrivalSeconds: number
+  trainPlatformSignalArrivalSeconds: number
   trainFrontSignalArrivalSeconds: number
   trainRearSignalArrivalSeconds: number
 }
@@ -21,12 +22,15 @@ export type SimultaneityExperiment = {
 /**
  * Two lightning strikes hit the ends of a train simultaneously in the
  * platform frame. Times in the train frame are measured from the instant
- * its midpoint passes the platform observer.
+ * its midpoint passes the platform observer. The platform observer can stand
+ * a transverse distance from the track; this delays both flashes equally.
  */
-export function simultaneityExperiment(beta: number, properLengthMeters: number): SimultaneityExperiment {
+export function simultaneityExperiment(beta: number, properLengthMeters: number, platformObserverOffsetMeters = 0): SimultaneityExperiment {
   if (properLengthMeters <= 0) throw new RangeError('properLengthMeters must be positive')
+  if (!Number.isFinite(platformObserverOffsetMeters) || platformObserverOffsetMeters < 0) throw new RangeError('platformObserverOffsetMeters must be finite and nonnegative')
   const g = gamma(beta)
   const halfStrikeGap = beta * properLengthMeters / (2 * C)
+  const platformArrival = Math.hypot(properLengthMeters / (2 * g), platformObserverOffsetMeters) / C
   return {
     beta,
     gamma: g,
@@ -35,7 +39,9 @@ export function simultaneityExperiment(beta: number, properLengthMeters: number)
     trainFrontStrikeSeconds: -halfStrikeGap,
     trainRearStrikeSeconds: halfStrikeGap,
     trainStrikeGapSeconds: 2 * halfStrikeGap,
-    platformSignalArrivalSeconds: properLengthMeters / (2 * g * C),
+    platformSignalArrivalSeconds: platformArrival,
+    // Bob is at x = 0 in the platform frame, so t′ = γt for this event.
+    trainPlatformSignalArrivalSeconds: g * platformArrival,
     trainFrontSignalArrivalSeconds: (1 - beta) * properLengthMeters / (2 * C),
     trainRearSignalArrivalSeconds: (1 + beta) * properLengthMeters / (2 * C),
   }
